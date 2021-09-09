@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Layout from '../components/layouts/Layout';
+import roles from '../helpers/roles';
+import routes from '../helpers/routes';
 import AccountPage from '../pages/AccountPage';
 import UsersPage from '../pages/admin/UsersPage';
 import HomePage from '../pages/HomePage';
@@ -16,13 +18,13 @@ export default function AppRouter() {
     <Router>
       <Layout>
         <Switch>
-          <PublicRoute exact path="/" component={HomePage}></PublicRoute>
-          <PublicRoute exact path="/login" component={LoginPage}></PublicRoute>
-          <PublicRoute exact path="/register" component={RegisterPage}></PublicRoute>
-          <PrivateRoute exact path="/account" component={AccountPage}></PrivateRoute>
-          <PrivateRoute exact path="/projects" component={ProjectsPage}></PrivateRoute>
-          <PrivateRoute exact path="/project/projectId" component={ProjectPage}></PrivateRoute>
-          <PrivateRoute exact path="/admin/users" component={UsersPage}></PrivateRoute>
+          <PublicRoute exact path={routes.home} component={HomePage}></PublicRoute>
+          <PublicRoute exact path={routes.login} component={LoginPage}></PublicRoute>
+          <PublicRoute exact path={routes.register} component={RegisterPage}></PublicRoute>
+          <PrivateRoute exact path={routes.account} component={AccountPage}></PrivateRoute>
+          <PrivateRoute exact path={routes.projects} component={ProjectsPage}></PrivateRoute>
+          <PrivateRoute exact path={routes.project()} component={ProjectPage}></PrivateRoute>
+          <PrivateRoute hasRole={roles.admin} exact path={routes.admin.users} component={UsersPage}></PrivateRoute>
 
           <Route path="*" component={NotFoundPage}></Route>
         </Switch>
